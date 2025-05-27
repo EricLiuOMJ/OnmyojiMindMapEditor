@@ -16,7 +16,9 @@
           class="single-slot"
         >
           <img
-            :src="slot.avatar || '/pics/Shikigami/default.png'"
+            :src="
+              slot.avatar || '/OnmyojiMindMapEditor/pics/Shikigami/default.png'
+            "
             :alt="slot.name || '未选择式神'"
             class="avatar"
           />
@@ -32,7 +34,8 @@
           >
             <img
               :src="
-                findShikigami(subSlot).avatar || '/pics/Shikigami/default.png'
+                findShikigami(subSlot).avatar ||
+                '/OnmyojiMindMapEditor/pics/Shikigami/default.png'
               "
               :alt="findShikigami(subSlot).name || '未选择式神'"
               class="avatar"
@@ -57,7 +60,8 @@
               >
                 <img
                   :src="
-                    findShikigami(item).avatar || '/pics/Shikigami/default.png'
+                    findShikigami(item).avatar ||
+                    '/OnmyojiMindMapEditor/pics/Shikigami/default.png'
                   "
                   :alt="findShikigami(item).name || '未选择式神'"
                   class="avatar"
@@ -87,7 +91,7 @@
                     <img
                       :src="
                         findShikigami(item).avatar ||
-                        '/pics/Shikigami/default.png'
+                        '/OnmyojiMindMapEditor/pics/Shikigami/default.png'
                       "
                       :alt="findShikigami(item).name || '未选择式神'"
                       class="avatar"
@@ -102,7 +106,7 @@
                   <img
                     :src="
                       findShikigami(nestedContent).avatar ||
-                      '/pics/Shikigami/default.png'
+                      '/OnmyojiMindMapEditor/pics/Shikigami/default.png'
                     "
                     :alt="findShikigami(nestedContent).name || '未选择式神'"
                     class="avatar"
@@ -117,7 +121,8 @@
             <div v-else class="sub-slot">
               <img
                 :src="
-                  findShikigami(content).avatar || '/pics/Shikigami/default.png'
+                  findShikigami(content).avatar ||
+                  '/OnmyojiMindMapEditor/pics/Shikigami/default.png'
                 "
                 :alt="findShikigami(content).name || '未选择式神'"
                 class="avatar"
@@ -333,6 +338,23 @@
 <script setup>
 import { ref, computed } from "vue";
 
+// 移动shikigamiList到setup中
+const shikigamiList = ref([]);
+
+// 加载式神数据
+async function loadShikigamiData() {
+  try {
+    // 使用 import 方式加载数据，Vite 会处理路径
+    const data = await import("../public/data/Shikigami.json");
+    shikigamiList.value = data.default;
+  } catch (error) {
+    console.error("加载式神数据失败:", error);
+  }
+}
+
+// 立即加载式神数据
+loadShikigamiData();
+
 const props = defineProps({
   args: {
     type: [Array, String],
@@ -362,25 +384,27 @@ function hasBranches(obj) {
   );
 }
 
-// 添加一个递归处理分支的辅助函数
-// 修改findShikigami函数
+// 优化findShikigami函数
 function findShikigami(item) {
   // 如果已经是一个有效的式神对象，直接返回
-  if (typeof item === "object" && item !== null && item.name) {
+  if (typeof item === "object" && item !== null && item.name && item.avatar) {
     return item;
   }
 
   // 获取式神名称
   const name = typeof item === "string" ? item : "";
+  if (!name)
+    return {
+      name: "",
+      avatar: "/OnmyojiMindMapEditor/pics/Shikigami/default.png",
+    };
 
   // 在式神列表中查找
   const found = shikigamiList.value.find((s) => s.name === name);
-
-  // 返回找到的式神或创建新的式神对象
   return (
     found || {
-      name: name,
-      avatar: "/pics/Shikigami/default.png",
+      name,
+      avatar: "/OnmyojiMindMapEditor/pics/Shikigami/default.png",
     }
   );
 }
@@ -485,7 +509,12 @@ const slots = computed(() => {
       }
     } catch (e) {
       console.error("解析简化格式失败:", e);
-      return [{ name: "", avatar: "/pics/Shikigami/default.png" }];
+      return [
+        {
+          name: "",
+          avatar: "/OnmyojiMindMapEditor/pics/Shikigami/default.png",
+        },
+      ];
     }
   }
 
@@ -502,7 +531,9 @@ const slots = computed(() => {
   }
 
   // 如果都失败了，返回默认值
-  return [{ name: "", avatar: "/pics/Shikigami/default.png" }];
+  return [
+    { name: "", avatar: "/OnmyojiMindMapEditor/pics/Shikigami/default.png" },
+  ];
 });
 
 const showSelector = ref(false);
@@ -546,22 +577,11 @@ function handleSelect(shikigami) {
 }
 </script>
 
-<!-- 删除额外的script标签中的重复代码 -->
 <script>
 import { ref, computed } from "vue";
+import shikigamiList from "../public/data/Shikigami.json";
 
-// 移动shikigamiList到setup中
-const shikigamiList = ref([]);
-
-// 加载式神数据
-async function loadShikigamiData() {
-  try {
-    const response = await fetch("/data/Shikigami.json");
-    shikigamiList.value = await response.json();
-  } catch (error) {
-    console.error("加载式神数据失败:", error);
-  }
-}
+// const shikigamiList = ref([]);
 
 // 优化findShikigami函数
 function findShikigami(item) {
@@ -572,13 +592,19 @@ function findShikigami(item) {
 
   // 获取式神名称
   const name = typeof item === "string" ? item : "";
-  if (!name) return { name: "", avatar: "/pics/Shikigami/default.png" };
+  if (!name)
+    return {
+      name: "",
+      avatar: "/OnmyojiMindMapEditor/pics/Shikigami/default.png",
+    };
 
   // 在式神列表中查找
   const found = shikigamiList.value.find((s) => s.name === name);
-  return found || { name, avatar: "/pics/Shikigami/default.png" };
+  return (
+    found || {
+      name,
+      avatar: "/OnmyojiMindMapEditor/pics/Shikigami/default.png",
+    }
+  );
 }
-
-// 立即加载式神数据
-loadShikigamiData();
 </script>

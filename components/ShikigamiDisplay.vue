@@ -11,7 +11,10 @@
         <!-- 式神展示 -->
         <div class="single-slot shikigami">
           <img
-            :src="shikigamiData.avatar || '/pics/Shikigami/default.png'"
+            :src="
+              shikigamiData.avatar ||
+              '/OnmyojiMindMapEditor/pics/Shikigami/default.png'
+            "
             :alt="shikigami || '未选择式神'"
             class="avatar"
           />
@@ -26,7 +29,9 @@
           class="single-slot yuhun"
         >
           <img
-            :src="yuhun.avatar || '/pics/Yuhun/default.png'"
+            :src="
+              yuhun.avatar || '/OnmyojiMindMapEditor/pics/Yuhun/default.png'
+            "
             class="avatar"
           />
           <span class="name">{{ yuhun.name || "" }}</span>
@@ -336,7 +341,7 @@ const shikigamiData = computed(() => {
   return (
     found || {
       name: props.shikigami,
-      avatar: "/pics/Shikigami/default.png",
+      avatar: "/OnmyojiMindMapEditor/pics/Shikigami/default.png",
     }
   );
 });
@@ -347,7 +352,7 @@ const yuhunDataList = computed(() => {
     return (
       found || {
         name: name,
-        avatar: "/pics/Yuhun/default.png",
+        avatar: "/OnmyojiMindMapEditor/pics/Yuhun/default.png",
         type: "unknown",
       }
     );
