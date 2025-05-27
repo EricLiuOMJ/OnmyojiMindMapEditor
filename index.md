@@ -7,6 +7,9 @@ hero:
   tagline: VERSION 2025.5.27
   actions:
     - theme: brand
+      text: 介绍文档
+      link: /docs/introduction
+    - theme: alt
       text: ban鹿思维导图
       link: /docs/mindmap
     - theme: alt

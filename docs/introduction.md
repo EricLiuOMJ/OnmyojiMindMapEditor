@@ -8,13 +8,13 @@
 
   ```bash
   pnpm install
-  pnpm run dev
+  pnpm run docs:dev
   ```
 
 - **构建发布**：
 
   ```bash
-  pnpm run build
+  pnpm run docs:build
   ```
 
 - **配置参考** ：
