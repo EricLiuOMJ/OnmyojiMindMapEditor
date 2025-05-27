@@ -1,0 +1,27 @@
+/* 彻底覆盖Vitepress的宽度限制 */
+:root {
+  --vp-layout-max-width: 100% !important;
+}
+
+.VPContent {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.VPContent .container {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 2rem !important;
+}
+
+.VPContent .content-container {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 auto !important;
+}
+
+/* 如果需要固定宽度 */
+.VPContent .content {
+  max-width: 1600px !important; /* 设置为你想要的宽度 */
+  margin: 0 auto !important;
+}
