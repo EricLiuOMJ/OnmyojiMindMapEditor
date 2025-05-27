@@ -5,7 +5,6 @@ export default defineConfig({
   title: "Onmyoji Mindmap Editor",
   description: "用Markdown的方式去制作阴阳师斗技思维导图",
   base: '/',
-  outDir: 'BuildDocs',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
