@@ -226,6 +226,23 @@
 />
 
 <ShikigamiDisplay
+  shikigami="月读"
+  order=15
+  description="555"
+  :yuhun="['招财猫']"
+  target="生命"
+  :positions="{
+    second: '速度',
+    fourth: '生命/防御',
+    sixth: '生命/防御',
+  }"
+  :parameters="{
+    speed: '258+',
+  }"
+  infoText="至少一个生命位"
+/>
+
+<ShikigamiDisplay
   shikigami="流光追月神"
   order=16
   :yuhun="['薙魂']"
@@ -327,7 +344,7 @@
   shikigami="巡音流歌"
   order=22
   description="155"
-  :yuhun="['共浅']"
+  :yuhun="['共潜']"
   target="抵抗"
   :positions="{
     second: '速度',
@@ -340,4 +357,430 @@
   infoText="带防御两件套"
 />
 
-### 低配
+<ShikigamiDisplay
+  shikigami="神启荒"
+  order=23
+  description="555"
+  :yuhun="['伤魂鸟']"
+  target="伤害输出"
+  :positions="{
+    second: '攻击',
+    fourth: '攻击',
+    sixth: '爆伤',
+  }"
+  :parameters="{
+    strike: '100%',
+  }"
+  infoText="有能力的话，速度尽量卡到124-126"
+/>
+
+<ShikigamiDisplay
+  shikigami="神启荒"
+  order=24
+  description="555"
+  :yuhun="['地藏像']"
+  target="伤害输出"
+  :positions="{
+    second: '攻击/生命',
+    fourth: '攻击/生命',
+    sixth: '爆伤/暴击',
+  }"
+  :parameters="{
+    strike: '100%',
+  }"
+  infoText="一个生命位和一个攻击位，面板高的优先"
+/>
+
+<ShikigamiDisplay
+  shikigami="龙珏"
+  order=25
+  description="555"
+  :yuhun="['地藏像']"
+  target="伤害输出"
+  :positions="{
+    second: '攻击/生命',
+    fourth: '攻击/生命',
+    sixth: '爆伤/暴击',
+  }"
+  :parameters="{
+    strike: '100%',
+    speed: '140+',
+  }"
+  infoText="一个生命位和一个攻击位，面板高的优先"
+/>
+
+<ShikigamiDisplay
+  shikigami="龙珏"
+  order=26
+  description="555"
+  :yuhun="['青女房']"
+  target="伤害输出"
+  :positions="{
+    second: '速度',
+    fourth: '攻击',
+    sixth: '爆伤/暴击',
+  }"
+  :parameters="{
+    strike: '100%',
+    speed: '195+',
+  }"
+  infoText="面板高的优先"
+/>
+
+<ShikigamiDisplay
+  shikigami="季"
+  order=27
+  description="555"
+  :yuhun="['镇墓兽']"
+  target="伤害输出"
+  :positions="{
+    second: '速度',
+    fourth: '攻击',
+    sixth: '爆伤',
+  }"
+  :parameters="{
+    speed: '200+',
+  }"
+  infoText="-"
+/>
+
+<ShikigamiDisplay
+  shikigami="猫川"
+  order=28
+  description="555"
+  :yuhun="['狂骨']"
+  target="攻击"
+  :positions="{
+    second: '速度',
+    fourth: '攻击',
+    sixth: '攻击',
+  }"
+  infoText="猫川速度 小于 鬼金羊的0.7倍，并且无限接近，最好防御两件套"
+/>
+
+<ShikigamiDisplay
+  shikigami="心友犬神"
+  order=28
+  description="555"
+  :yuhun="['网切']"
+  target="伤害输出"
+  :positions="{
+    second: '攻击',
+    fourth: '攻击',
+    sixth: '爆伤',
+  }"
+  :parameters="{
+    strike: '100%',
+  }"
+  infoText="-"
+/>
+
+<ShikigamiDisplay
+  shikigami="龙吟铃鹿御前"
+  order=29
+  description="555"
+  :yuhun="['隐念']"
+  target="伤害输出"
+  :positions="{
+    second: '攻击',
+    fourth: '攻击',
+    sixth: '爆伤',
+  }"
+  :parameters="{
+    strike: '100%',
+    speed: '140+',
+  }"
+  infoText="-"
+/>
+
+<ShikigamiDisplay
+  shikigami="龙吟铃鹿御前"
+  order=30
+  description="555"
+  :yuhun="['木魅', '轮入道']"
+  target="生命"
+  :positions="{
+    second: '速度',
+    fourth: '生命',
+    sixth: '爆伤/暴击',
+  }"
+  :parameters="{
+    strike: '100%',
+    speed: '195+',
+  }"
+  infoText="防御两件套"
+/>
+
+<ShikigamiDisplay
+  shikigami="铃彦姬"
+  order=31
+  description="555"
+  :yuhun="['伤魂鸟']"
+  target="伤害输出"
+  :positions="{
+    second: '攻击',
+    fourth: '攻击',
+    sixth: '爆伤/暴击',
+  }"
+  :parameters="{
+    strike: '100%',
+  }"
+  infoText="-"
+/>
+
+<ShikigamiDisplay
+  shikigami="闻人翊悬"
+  order=32
+  description="555"
+  :yuhun="['伤魂鸟']"
+  target="伤害输出"
+  :positions="{
+    second: '攻击',
+    fourth: '攻击',
+    sixth: '爆伤/暴击',
+  }"
+  :parameters="{
+    strike: '100%'
+  }"
+  infoText="-"
+/>
+
+<ShikigamiDisplay
+  shikigami="荒川之主"
+  order=33
+  description="555"
+  :yuhun="['青女房']"
+  target="伤害输出"
+  :positions="{
+    second: '速度',
+    fourth: '攻击',
+    sixth: '爆伤/暴击',
+  }"
+  :parameters="{
+    strike: '100%',
+    speed: '196+'
+  }"
+  infoText="-"
+/>
+
+<ShikigamiDisplay
+  shikigami="祸津神"
+  order=34
+  description="555"
+  :yuhun="['伤魂鸟']"
+  target="治疗量"
+  :positions="{
+    second: '生命',
+    fourth: '生命',
+    sixth: '爆伤/暴击',
+  }"
+  :parameters="{
+    strike: '100%',
+    speed: '140+'
+  }"
+  infoText="-"
+/>
+
+<ShikigamiDisplay
+  shikigami="苍风一目连"
+  order=35
+  description="555"
+  :yuhun="['共潜']"
+  target="伤害输出"
+  :positions="{
+    second: '速度',
+    fourth: '攻击',
+    sixth: '爆伤/暴击',
+  }"
+  :parameters="{
+    strike: '120%',
+    speed: '195+'
+  }"
+  infoText="-"
+/>
+
+<ShikigamiDisplay
+  shikigami="神酿星熊童子"
+  order=36
+  description="555"
+  :yuhun="['地藏像']"
+  target="命中"
+  :positions="{
+    second: '生命',
+    fourth: '命中',
+    sixth: '生命',
+  }"
+  infoText="最好防御两件套"
+/>
+
+<ShikigamiDisplay
+  shikigami="泷"
+  order=37
+  description="555"
+  :yuhun="['蚌精']"
+  target="治疗量"
+  :positions="{
+    second: '生命',
+    fourth: '生命',
+    sixth: '爆伤/暴击',
+  }"
+  :parameters="{
+    strike: '100%',
+  }"
+  infoText="-"
+/>
+
+<ShikigamiDisplay
+  shikigami="一目连"
+  order=38
+   description="555"
+  :yuhun="['蚌精']"
+  target="治疗量"
+  :positions="{
+    second: '生命',
+    fourth: '生命',
+    sixth: '爆伤/暴击',
+  }"
+  :parameters="{
+    strike: '100%',
+    speed: '140+'
+  }"
+  infoText="-"
+/>
+
+<ShikigamiDisplay
+  shikigami="匣中少女"
+  order=39
+  description="555"
+  :yuhun="['蚌精']"
+  target="治疗量"
+  :positions="{
+    second: '生命',
+    fourth: '生命',
+    sixth: '爆伤/暴击',
+  }"
+  :parameters="{
+    strike: '100%',
+  }"
+  infoText="-"
+/>
+
+<ShikigamiDisplay
+  shikigami="骁浪荒川之主"
+  order=40
+  description="555"
+  :yuhun="['散件']"
+  target="伤害输出"
+  :positions="{
+    second: '速度',
+    fourth: '攻击',
+    sixth: '爆伤/暴击',
+  }"
+  :parameters="{
+    strike: '100%',
+    attack: '6000+',
+    speed: '200+'
+  }"
+  infoText="-"
+/>
+
+<ShikigamiDisplay
+  shikigami="入内雀"
+  order=41
+  description="555"
+  :yuhun="['火灵']"
+  target="防御"
+  :positions="{
+    second: '防御',
+    fourth: '防御',
+    sixth: '防御',
+  }"
+  infoText="-"
+/>
+
+<ShikigamiDisplay
+  shikigami="入内雀"
+  order=42
+  description="555"
+  :yuhun="['木魅']"
+  target="防御"
+  :positions="{
+    second: '防御',
+    fourth: '防御',
+    sixth: '防御',
+  }"
+  infoText="-"
+/>
+
+<ShikigamiDisplay
+  shikigami="御馔津"
+  order=43
+  description="111"
+  :yuhun="['木魅']"
+  target="抵抗"
+  :positions="{
+    second: '生命',
+    fourth: '抵抗',
+    sixth: '生命',
+  }"
+  :parameters="{
+    speed: '<128',
+    hit: '40%+',
+  }"
+  infoText="-"
+/>
+
+<ShikigamiDisplay
+  shikigami="御馔津"
+  order=44
+  description="111"
+  :yuhun="['火灵']"
+  target="抵抗"
+  :positions="{
+    second: '生命',
+    fourth: '抵抗',
+    sixth: '生命',
+  }"
+  :parameters="{
+    speed: '<128',
+    hit: '40%+',
+  }"
+  infoText="-"
+/>
+
+<ShikigamiDisplay
+  shikigami="不知火"
+  order=45
+  description="555"
+  :yuhun="['火灵']"
+  target="生命"
+  :positions="{
+    second: '生命',
+    fourth: '生命',
+    sixth: '生命',
+  }"
+  :parameters="{
+    speed: '<128',
+    defense: '850+',
+  }"
+  infoText="防御两件套"
+/>
+
+<ShikigamiDisplay
+  shikigami="彼岸花"
+  order=45
+  description="111"
+  :yuhun="['钟灵']"
+  target="效果命中"
+  :positions="{
+    second: '速度',
+    fourth: '命中',
+    sixth: '生命',
+  }"
+  :parameters="{
+    speed: '190+',
+  }"
+  infoText="-"
+/>
+
+## 低配
