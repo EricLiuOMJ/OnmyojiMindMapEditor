@@ -471,6 +471,7 @@
   }"
   :parameters="{
     strike: '100%',
+    speed: '128+',
   }"
   infoText="-"
 />

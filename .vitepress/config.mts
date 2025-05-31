@@ -9,12 +9,12 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Introduction', link: '/docs/introduction' },
-      { text: 'Example',
+      { text: '主页', link: '/' },
+      { text: '说明文件', link: '/docs/introduction' },
+      { text: '示例',
         items: [
-          { text: 'Mindmap', link: '/docs/mindmap' },
-          { text: 'Config', link: '/docs/config' }
+          { text: '思维导图', link: '/docs/mindmap' },
+          { text: '配置文档', link: '/docs/config' }
         ]
        }
     ],
