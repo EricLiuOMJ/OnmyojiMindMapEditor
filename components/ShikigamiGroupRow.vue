@@ -1,7 +1,7 @@
 <template>
   <div class="shikigami-group-row">
-    <ShikigamiGroup :args="args1" title="对方" theme="A" />
-    <ShikigamiGroup :args="args2" title="我方" theme="B" />
+    <ShikigamiGroup :args="args1" title="对方" theme="A" :oname="oname1" />
+    <ShikigamiGroup :args="args2" title="我方" theme="B" :oname="oname2" />
   </div>
 </template>
 
@@ -17,6 +17,12 @@ const props = defineProps({
   args2: {
     type: [Array, String],
     required: true,
+  },
+  oname1: {
+    type: String,
+  },
+  oname2: {
+    type: String,
   },
 });
 </script>

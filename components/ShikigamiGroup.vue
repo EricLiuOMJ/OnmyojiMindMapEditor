@@ -23,6 +23,10 @@
             class="avatar"
           />
           <span class="name">{{ slot.name || "" }}</span>
+          <!-- 新增的参数div -->
+          <div v-if="slot.parameter" class="parameter">
+            {{ slot.parameter }}
+          </div>
         </div>
 
         <!-- 数组（竖直排列） -->
@@ -34,13 +38,17 @@
           >
             <img
               :src="
-                findShikigami(subSlot).avatar ||
+                subSlot.avatar ||
                 '/OnmyojiMindMapEditor/pics/Shikigami/default.png'
               "
-              :alt="findShikigami(subSlot).name || '未选择式神'"
+              :alt="subSlot.name || '未选择式神'"
               class="avatar"
             />
-            <span class="name">{{ findShikigami(subSlot).name || "" }}</span>
+            <span class="name">{{ subSlot.name || "" }}</span>
+            <!-- 新增的参数div -->
+            <div v-if="subSlot.parameter" class="parameter">
+              {{ subSlot.parameter }}
+            </div>
           </div>
         </div>
 
@@ -60,13 +68,17 @@
               >
                 <img
                   :src="
-                    findShikigami(item).avatar ||
+                    item.avatar ||
                     '/OnmyojiMindMapEditor/pics/Shikigami/default.png'
                   "
-                  :alt="findShikigami(item).name || '未选择式神'"
+                  :alt="item.name || '未选择式神'"
                   class="avatar"
                 />
-                <span class="name">{{ findShikigami(item).name || "" }}</span>
+                <span class="name">{{ item.name || "" }}</span>
+                <!-- 新增的参数div -->
+                <div v-if="item.parameter" class="parameter">
+                  {{ item.parameter }}
+                </div>
               </div>
             </div>
             <!-- 分支内容是嵌套的condition -->
@@ -90,30 +102,34 @@
                   >
                     <img
                       :src="
-                        findShikigami(item).avatar ||
+                        item.avatar ||
                         '/OnmyojiMindMapEditor/pics/Shikigami/default.png'
                       "
-                      :alt="findShikigami(item).name || '未选择式神'"
+                      :alt="item.name || '未选择式神'"
                       class="avatar"
                     />
-                    <span class="name">{{
-                      findShikigami(item).name || ""
-                    }}</span>
+                    <span class="name">{{ item.name || "" }}</span>
+                    <!-- 新增的参数div -->
+                    <div v-if="item.parameter" class="parameter">
+                      {{ item.parameter }}
+                    </div>
                   </div>
                 </div>
                 <!-- 嵌套分支内容是单个式神 -->
                 <div v-else class="sub-slot">
                   <img
                     :src="
-                      findShikigami(nestedContent).avatar ||
+                      nestedContent.avatar ||
                       '/OnmyojiMindMapEditor/pics/Shikigami/default.png'
                     "
-                    :alt="findShikigami(nestedContent).name || '未选择式神'"
+                    :alt="nestedContent.name || '未选择式神'"
                     class="avatar"
                   />
-                  <span class="name">{{
-                    findShikigami(nestedContent).name || ""
-                  }}</span>
+                  <span class="name">{{ nestedContent.name || "" }}</span>
+                  <!-- 新增的参数div -->
+                  <div v-if="nestedContent.parameter" class="parameter">
+                    {{ nestedContent.parameter }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -121,17 +137,27 @@
             <div v-else class="sub-slot">
               <img
                 :src="
-                  findShikigami(content).avatar ||
+                  content.avatar ||
                   '/OnmyojiMindMapEditor/pics/Shikigami/default.png'
                 "
-                :alt="findShikigami(content).name || '未选择式神'"
+                :alt="content.name || '未选择式神'"
                 class="avatar"
               />
-              <span class="name">{{ findShikigami(content).name || "" }}</span>
+              <span class="name">{{ content.name || "" }}</span>
+              <!-- 新增的参数div -->
+              <div v-if="content.parameter" class="parameter">
+                {{ content.parameter }}
+              </div>
             </div>
           </div>
         </div>
       </template>
+    </div>
+
+    <!-- 新增的左下角模块 -->
+    <div class="bottom-left-module">
+      <div>阴阳师</div>
+      <i class="onmyoji-name">{{ oname }}</i>
     </div>
   </div>
 </template>
@@ -217,6 +243,18 @@
   border-bottom: 2px solid;
   margin-bottom: 0;
   white-space: nowrap;
+}
+
+.bottom-left-module {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  color: var(--vp-c-text-2); /* 可以根据主题调整颜色 */
+}
+
+.onmyoji-name {
+  font-size: 18px;
+  font-weight: 900;
 }
 
 /* 槽位容器 - 水平排列所有主要元素 */
@@ -307,7 +345,7 @@
 }
 
 .name {
-  margin-top: 8px;
+  margin-top: 2px;
   font-size: 14px;
   font-weight: 500;
   color: inherit;
@@ -335,6 +373,13 @@
   gap: 10px;
 }
 
+/* 新增的参数样式 */
+.parameter {
+  font-size: 12px; /* 调整字体大小 */
+  color: var(--vp-c-text-3); /* 使用一个较浅的文本颜色 */
+  margin-top: 2px;
+}
+
 @media (max-width: 600px) {
   .name {
     display: none;
@@ -348,6 +393,10 @@
   .array-slot {
     gap: 2px;
     padding: 1px;
+  }
+  /* 在小屏幕下也隐藏参数 */
+  .parameter {
+    display: none;
   }
 }
 </style>
@@ -388,6 +437,10 @@ const props = defineProps({
     default: "A",
     validator: (value) => ["A", "B"].includes(value),
   },
+  oname: {
+    type: String,
+    default: "源赖光",
+  },
 });
 
 // 检查对象是否包含分支结构
@@ -401,49 +454,16 @@ function hasBranches(obj) {
   );
 }
 
-// 优化findShikigami函数
-function findShikigami(item) {
-  // 如果已经是一个有效的式神对象，直接返回
-  if (typeof item === "object" && item !== null && item.name && item.avatar) {
-    return item;
+// 优化findShikigami函数，现在它只负责查找式神信息，不处理括号内容
+function findShikigamiInfo(name) {
+  if (!name || typeof name !== "string") {
+    return null;
   }
-
-  // 获取式神名称
-  const name = typeof item === "string" ? item : "";
-  if (!name)
-    return {
-      name: "",
-      avatar: "/OnmyojiMindMapEditor/pics/Shikigami/default.png",
-    };
-
-  // 在式神列表中查找
   const found = shikigamiList.value.find((s) => s.name === name);
-  return (
-    found || {
-      name,
-      avatar: "/OnmyojiMindMapEditor/pics/Shikigami/default.png",
-    }
-  );
+  return found || null;
 }
 
-// 修改processBranchContent函数
-function processBranchContent(content) {
-  if (Array.isArray(content)) {
-    return content.map((item) => findShikigami(item));
-  } else if (typeof content === "object" && content !== null) {
-    // 如果是嵌套的分支对象，递归处理
-    const processedBranch = {};
-    for (const [key, value] of Object.entries(content)) {
-      processedBranch[key] = processBranchContent(value);
-    }
-    return processedBranch;
-  } else {
-    // 处理单个式神字符串
-    return findShikigami(content);
-  }
-}
-
-// 新增：解析简化格式的字符串输入
+// 修改 parseSimplifiedFormat 函数来解析 () 和 / / 内容
 function parseSimplifiedFormat(input) {
   if (!input || typeof input !== "string") return [];
 
@@ -454,9 +474,28 @@ function parseSimplifiedFormat(input) {
       item = item.trim();
       if (!item) return null;
 
+      let mainContent = item;
+      let bracketContent = ""; // () 中的内容
+      let parameterContent = ""; // / / 中的内容
+
+      // 提取 / / 中的内容
+      // 匹配 /任意非/字符/，并确保是独立的参数，而不是路径的一部分
+      const parameterMatch = mainContent.match(/\/([^/]+)\/$/); // 匹配末尾的 /.../
+      if (parameterMatch) {
+        parameterContent = parameterMatch[1].trim();
+        mainContent = mainContent.replace(parameterMatch[0], "").trim();
+      }
+
+      // 提取 () 中的内容
+      const bracketMatch = mainContent.match(/（([^）]+)）/);
+      if (bracketMatch) {
+        bracketContent = bracketMatch[1].trim();
+        mainContent = mainContent.replace(bracketMatch[0], "").trim();
+      }
+
       // 处理条件分支（以@开头）
-      if (item.startsWith("@")) {
-        const conditions = item.split(" ");
+      if (mainContent.startsWith("@")) {
+        const conditions = mainContent.split(" ");
         const result = {};
 
         conditions.forEach((cond) => {
@@ -495,18 +534,65 @@ function parseSimplifiedFormat(input) {
           }
         });
 
+        // 对于条件分支，参数和括号内容可能需要特殊处理，这里简化处理，不将它们附加到每个子项
+        // 如果需要，可以修改这里的逻辑，将 parameterContent 和 bracketContent 传递下去
         return result;
       }
 
       // 处理数组（包含逗号）
-      if (item.includes(",")) {
-        return item.split(",").map((s) => s.trim());
+      if (mainContent.includes(",")) {
+        return mainContent.split(",").map((s) => ({
+          name: s.trim(),
+          bracket: bracketContent,
+          parameter: parameterContent,
+        }));
       }
 
       // 处理单个式神
-      return item.trim();
+      return {
+        name: mainContent.trim(),
+        bracket: bracketContent,
+        parameter: parameterContent,
+      };
     })
     .filter(Boolean); // 移除空值
+}
+
+// 修改 processBranchContent 函数以处理新的数据结构
+function processBranchContent(content) {
+  if (Array.isArray(content)) {
+    return content.map((item) => {
+      const shikigamiInfo = findShikigamiInfo(item.name); // 使用新的查找函数
+      const displayName = shikigamiInfo ? shikigamiInfo.name : item.name; // 使用查找结果的名称或原始名称
+      const finalName = item.bracket
+        ? `${item.bracket} ${displayName}`
+        : displayName; // 组合括号内容和名称
+      return {
+        ...shikigamiInfo, // 包含头像等信息
+        name: finalName, // 使用组合后的显示名称
+        parameter: item.parameter, // 传递参数内容
+      };
+    });
+  } else if (typeof content === "object" && content !== null) {
+    // 如果是嵌套的分支对象，递归处理
+    const processedBranch = {};
+    for (const [key, value] of Object.entries(content)) {
+      processedBranch[key] = processBranchContent(value);
+    }
+    return processedBranch;
+  } else {
+    // 处理单个式神对象（来自 parseSimplifiedFormat）
+    const shikigamiInfo = findShikigamiInfo(content.name); // 使用新的查找函数
+    const displayName = shikigamiInfo ? shikigamiInfo.name : content.name; // 使用查找结果的名称或原始名称
+    const finalName = content.bracket
+      ? `${content.bracket} ${displayName}`
+      : displayName; // 组合括号内容和名称
+    return {
+      ...shikigamiInfo, // 包含头像等信息
+      name: finalName, // 使用组合后的显示名称
+      parameter: content.parameter, // 传递参数内容
+    };
+  }
 }
 
 const slots = computed(() => {
@@ -517,11 +603,38 @@ const slots = computed(() => {
       if (parsedSimple.length > 0) {
         return parsedSimple.map((item) => {
           if (Array.isArray(item)) {
-            return item.map((name) => findShikigami(name));
-          } else if (typeof item === "object" && item !== null) {
+            return item.map((data) => {
+              // item 现在是 { name, bracket, parameter }
+              const shikigamiInfo = findShikigamiInfo(data.name);
+              const displayName = shikigamiInfo
+                ? shikigamiInfo.name
+                : data.name;
+              const finalName = data.bracket
+                ? `${data.bracket} ${displayName}`
+                : displayName;
+              return {
+                ...shikigamiInfo,
+                name: finalName,
+                parameter: data.parameter,
+              };
+            });
+          } else if (typeof item === "object" && item !== null && !item.name) {
+            // 条件分支对象
+            // 对于条件分支，parseSimplifiedFormat 返回的是处理后的结构，直接传递给 processBranchContent
             return processBranchContent(item);
+          } else {
+            // 单个式神对象 { name, bracket, parameter }
+            const shikigamiInfo = findShikigamiInfo(item.name);
+            const displayName = shikigamiInfo ? shikigamiInfo.name : item.name;
+            const finalName = item.bracket
+              ? `${item.bracket} ${displayName}`
+              : displayName;
+            return {
+              ...shikigamiInfo,
+              name: finalName,
+              parameter: item.parameter,
+            };
           }
-          return findShikigami(item);
         });
       }
     } catch (e) {
@@ -530,98 +643,124 @@ const slots = computed(() => {
         {
           name: "",
           avatar: "/OnmyojiMindMapEditor/pics/Shikigami/default.png",
+          parameter: "",
         },
       ];
     }
   }
 
-  // 如果是数组直接使用
+  // 如果是数组直接使用 (假设数组中的项已经是 { name, avatar, parameter } 格式或字符串)
   if (Array.isArray(props.args)) {
     return props.args.map((item) => {
       if (Array.isArray(item)) {
-        return item.map((name) => findShikigami(name));
-      } else if (typeof item === "object" && item !== null) {
+        return item.map((subItem) => {
+          // 假设 subItem 可能是字符串或对象
+          if (typeof subItem === "string") {
+            // 如果是字符串，尝试解析 () 和 / /，并查找式神信息
+            let mainContent = subItem.trim();
+            let bracketContent = "";
+            let parameterContent = "";
+
+            const parameterMatch = mainContent.match(/\/([^/]+)\/$/);
+            if (parameterMatch) {
+              parameterContent = parameterMatch[1].trim();
+              mainContent = mainContent.replace(parameterMatch[0], "").trim();
+            }
+
+            const bracketMatch = mainContent.match(/（([^）]+)）/);
+            if (bracketMatch) {
+              bracketContent = bracketMatch[1].trim();
+              mainContent = mainContent.replace(bracketMatch[0], "").trim();
+            }
+
+            const shikigamiInfo = findShikigamiInfo(mainContent);
+            const displayName = shikigamiInfo
+              ? shikigamiInfo.name
+              : mainContent;
+            const finalName = bracketContent
+              ? `${bracketContent} ${displayName}`
+              : displayName;
+
+            return {
+              ...shikigamiInfo,
+              name: finalName,
+              parameter: parameterContent,
+            };
+          } else if (typeof subItem === "object" && subItem !== null) {
+            // 如果已经是对象，确保包含 name, avatar, parameter 字段
+            return {
+              name: subItem.name || "",
+              avatar:
+                subItem.avatar ||
+                "/OnmyojiMindMapEditor/pics/Shikigami/default.png",
+              parameter: subItem.parameter || "",
+            };
+          }
+          return {
+            name: "",
+            avatar: "/OnmyojiMindMapEditor/pics/Shikigami/default.png",
+            parameter: "",
+          };
+        });
+      } else if (typeof item === "object" && item !== null && !item.name) {
+        // 条件分支对象
         return processBranchContent(item);
+      } else {
+        // 单个式神对象或字符串
+        if (typeof item === "string") {
+          // 如果是字符串，尝试解析 () 和 / /，并查找式神信息
+          let mainContent = item.trim();
+          let bracketContent = "";
+          let parameterContent = "";
+
+          const parameterMatch = mainContent.match(/\/([^/]+)\/$/);
+          if (parameterMatch) {
+            parameterContent = parameterMatch[1].trim();
+            mainContent = mainContent.replace(parameterMatch[0], "").trim();
+          }
+
+          const bracketMatch = mainContent.match(/（([^）]+)）/);
+          if (bracketMatch) {
+            bracketContent = bracketMatch[1].trim();
+            mainContent = mainContent.replace(bracketMatch[0], "").trim();
+          }
+
+          const shikigamiInfo = findShikigamiInfo(mainContent);
+          const displayName = shikigamiInfo ? shikigamiInfo.name : mainContent;
+          const finalName = bracketContent
+            ? `${bracketContent} ${displayName}`
+            : displayName;
+
+          return {
+            ...shikigamiInfo,
+            name: finalName,
+            parameter: parameterContent,
+          };
+        } else if (typeof item === "object" && item !== null) {
+          // 如果已经是对象，确保包含 name, avatar, parameter 字段
+          return {
+            name: item.name || "",
+            avatar:
+              item.avatar || "/OnmyojiMindMapEditor/pics/Shikigami/default.png",
+            parameter: item.parameter || "",
+          };
+        }
+        return {
+          name: "",
+          avatar: "/OnmyojiMindMapEditor/pics/Shikigami/default.png",
+          parameter: "",
+        };
       }
-      return findShikigami(item);
     });
   }
 
   // 如果都失败了，返回默认值
   return [
-    { name: "", avatar: "/OnmyojiMindMapEditor/pics/Shikigami/default.png" },
-  ];
-});
-
-const showSelector = ref(false);
-const currentSlotIndex = ref(0);
-const currentSubSlotIndex = ref(null);
-const currentSlot = ref({ name: "", avatar: "" });
-
-function addSingleSlot() {
-  slots.value.push({ name: "", avatar: "" });
-}
-
-function addArraySlot() {
-  slots.value.push([{ name: "", avatar: "" }]);
-}
-
-function addSubSlot(index) {
-  slots.value[index].push({ name: "", avatar: "" });
-}
-
-function removeSlot(index) {
-  slots.value.splice(index, 1);
-}
-
-function openSelector(index, subIndex = null) {
-  currentSlotIndex.value = index;
-  currentSubSlotIndex.value = subIndex;
-  currentSlot.value =
-    subIndex !== null
-      ? slots.value[index][subIndex] || { name: "", avatar: "" }
-      : slots.value[index] || { name: "", avatar: "" };
-  showSelector.value = true;
-}
-
-function handleSelect(shikigami) {
-  if (currentSubSlotIndex.value !== null) {
-    slots.value[currentSlotIndex.value][currentSubSlotIndex.value] = shikigami;
-  } else {
-    slots.value[currentSlotIndex.value] = shikigami;
-  }
-  showSelector.value = false;
-}
-</script>
-
-<script>
-import { ref, computed } from "vue";
-import shikigamiList from "../public/data/Shikigami.json";
-
-// const shikigamiList = ref([]);
-
-// 优化findShikigami函数
-function findShikigami(item) {
-  // 如果已经是一个有效的式神对象，直接返回
-  if (typeof item === "object" && item !== null && item.name && item.avatar) {
-    return item;
-  }
-
-  // 获取式神名称
-  const name = typeof item === "string" ? item : "";
-  if (!name)
-    return {
+    {
       name: "",
       avatar: "/OnmyojiMindMapEditor/pics/Shikigami/default.png",
-    };
-
-  // 在式神列表中查找
-  const found = shikigamiList.value.find((s) => s.name === name);
-  return (
-    found || {
-      name,
-      avatar: "/OnmyojiMindMapEditor/pics/Shikigami/default.png",
-    }
-  );
-}
+      parameter: "",
+    },
+  ];
+});
 </script>
