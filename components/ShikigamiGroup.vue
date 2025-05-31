@@ -296,6 +296,7 @@
 .avatar {
   width: 72px;
   height: 72px;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   border: 3px solid;
   transition: transform 0.2s;
@@ -332,6 +333,22 @@
   display: flex;
   flex-direction: row;
   gap: 10px;
+}
+
+@media (max-width: 600px) {
+  .name {
+    display: none;
+  }
+  .shikigami-group-container {
+    padding: 8px;
+  }
+  .slots-container {
+    gap: 2px;
+  }
+  .array-slot {
+    gap: 2px;
+    padding: 1px;
+  }
 }
 </style>
 

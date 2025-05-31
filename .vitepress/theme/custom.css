@@ -25,3 +25,7 @@
   max-width: 1600px !important; /* 设置为你想要的宽度 */
   margin: 0 auto !important;
 }
+
+body {
+  min-width: 768px;
+}

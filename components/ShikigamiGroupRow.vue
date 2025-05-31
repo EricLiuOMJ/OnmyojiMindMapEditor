@@ -38,4 +38,16 @@ const props = defineProps({
   flex-direction: column; /* 垂直排列 */
   justify-content: center; /* 内容垂直居中 */
 }
+
+/* 媒体查询：当屏幕宽度小于等于 1200px 时 */
+@media (max-width: 1200px) {
+  .shikigami-group-row {
+    flex-direction: column; /* 在小屏幕上垂直堆叠 */
+    align-items: center; /* 垂直堆叠时居中 */
+  }
+
+  .shikigami-group-row > * {
+    min-width: 90%; /* 在小屏幕上占据更多宽度 */
+  }
+}
 </style>
