@@ -8,82 +8,94 @@
 
       <!-- 新增的包裹序号右边内容的 div -->
       <div class="content-panel">
-        <!-- 式神展示 -->
-        <div class="single-slot shikigami">
-          <img
-            :src="
-              shikigamiData.avatar ||
-              '/OnmyojiMindMapEditor/pics/Shikigami/default.png'
-            "
-            :alt="shikigami || '未选择式神'"
-            class="avatar"
-          />
-          <span class="name">{{ shikigamiData.name || "" }}</span>
-          <span class="description">技能 {{ description || "555" }}</span>
-        </div>
+        <div class="content-container">
+          <div class="show">
+            <!-- 式神展示 -->
+            <div class="single-slot">
+              <div class="shikigami">
+                <img
+                  :src="
+                    shikigamiData.avatar ||
+                    '/OnmyojiMindMapEditor/pics/Shikigami/default.png'
+                  "
+                  :alt="shikigami || '未选择式神'"
+                  class="avatar"
+                />
+                <span class="name">{{ shikigamiData.name || "" }}</span>
+                <span class="description">技能 {{ description || "555" }}</span>
+              </div>
+            </div>
 
-        <!-- 御魂展示 -->
-        <div
-          v-for="(yuhun, index) in yuhunDataList"
-          :key="index"
-          class="single-slot yuhun"
-        >
-          <img
-            :src="
-              yuhun.avatar || '/OnmyojiMindMapEditor/pics/Yuhun/default.png'
-            "
-            class="avatar"
-          />
-          <span class="name">{{ yuhun.name || "" }}</span>
-        </div>
-
-        <!-- 位置和指标信息 -->
-        <div class="stats-container">
-          <div class="position-stats">
-            <div class="target-item">
-              <span class="stat-label">御魂指标</span>
-              <span class="stat-value">{{ target || "伤害输出" }}</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-label">二号位</span>
-              <span class="stat-value">{{ positions.second || "-" }}</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-label">四号位</span>
-              <span class="stat-value">{{ positions.fourth || "-" }}</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-label">六号位</span>
-              <span class="stat-value">{{ positions.sixth || "-" }}</span>
+            <!-- 御魂展示 -->
+            <div class="single-slot">
+              <div
+                v-for="(yuhun, index) in yuhunDataList"
+                :key="index"
+                class="yuhun-wrapper"
+              >
+                <div class="yuhun">
+                  <img
+                    :src="
+                      yuhun.avatar ||
+                      '/OnmyojiMindMapEditor/pics/Yuhun/default.png'
+                    "
+                    class="avatar"
+                  />
+                  <span class="yuhun-name">{{ yuhun.name || "" }}</span>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="indicator-stats">
-            <div class="stat-item">
-              <span class="stat-label">速度</span>
-              <span class="stat-value">{{ parameters.speed || "-" }}</span>
+
+          <!-- 位置和指标信息 -->
+          <div class="stats-container">
+            <div class="position-stats">
+              <div class="target-item">
+                <span class="target-label">御魂指标</span>
+                <span class="target-value">{{ target || "伤害输出" }}</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">二号位</span>
+                <span class="stat-value">{{ positions.second || "-" }}</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">四号位</span>
+                <span class="stat-value">{{ positions.fourth || "-" }}</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">六号位</span>
+                <span class="stat-value">{{ positions.sixth || "-" }}</span>
+              </div>
             </div>
-            <div class="stat-item">
-              <span class="stat-label">暴击</span>
-              <span class="stat-value">{{ parameters.strike || "-" }}</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-label">攻击</span>
-              <span class="stat-value">{{ parameters.attack || "-" }}</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-label">防御</span>
-              <span class="stat-value">{{ parameters.defense || "-" }}</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-label">命中</span>
-              <span class="stat-value">{{ parameters.hit || "-" }}</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-label">抵抗</span>
-              <span class="stat-value">{{ parameters.resist || "-" }}</span>
+            <div class="indicator-stats">
+              <div class="para-item">
+                <span class="para-label">速度</span>
+                <span class="para-value">{{ parameters.speed || "-" }}</span>
+              </div>
+              <div class="para-item">
+                <span class="para-label">暴击</span>
+                <span class="para-value">{{ parameters.strike || "-" }}</span>
+              </div>
+              <div class="para-item">
+                <span class="para-label">攻击</span>
+                <span class="para-value">{{ parameters.attack || "-" }}</span>
+              </div>
+              <div class="para-item">
+                <span class="para-label">防御</span>
+                <span class="para-value">{{ parameters.defense || "-" }}</span>
+              </div>
+              <div class="para-item">
+                <span class="para-label">命中</span>
+                <span class="para-value">{{ parameters.hit || "-" }}</span>
+              </div>
+              <div class="para-item">
+                <span class="para-label">抵抗</span>
+                <span class="para-value">{{ parameters.resist || "-" }}</span>
+              </div>
             </div>
           </div>
         </div>
+
         <div class="info-card">
           <div class="info-title">说明文本</div>
           <div class="info-panel">
@@ -106,7 +118,8 @@
   transition: all 0.3s ease;
   width: 100%;
   background: var(--vp-c-brand-1);
-  display: inline-block; /* Added to prevent full width */
+  display: inline-block;
+  min-width: 770px;
 }
 
 .content-wrapper {
@@ -125,32 +138,46 @@
   color: var(--vp-c-white); /* Example color */
   font-size: 20px;
   font-weight: bold;
-  flex-shrink: 0; /*Prevent shrinking */
 }
 
 .content-panel {
   display: flex;
-  gap: 20px;
-  align-items: center;
+  gap: 10px;
   flex-grow: 1;
-  height: 100%; /* Ensure it takes full height of content-wrapper */
-  border: 1px solid var(--vp-c-divider); /* Add border */
-  border-radius: 12px; /* Match parent border-radius */
-  padding: 16px; /* Add padding */
-  /* Modified: background color */
+  height: 100%;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  padding: 16px;
   background: var(--vp-c-bg);
+}
+
+.content-container {
+  display: flex;
+  align-content: center;
+  justify-content: start;
+}
+
+.show {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 
 .single-slot {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  gap: 2px;
+  min-width: 90px;
 }
 
 .yuhun-wrapper {
   display: flex;
-  flex-direction: row; /* Changed to column for vertical stacking */
+  flex-direction: columns;
+  align-items: center;
+  justify-content: center;
+  min-width: 90px;
   gap: 10px; /* Adjusted gap */
 }
 
@@ -166,88 +193,123 @@
   transform: scale(1.05);
 }
 
+.shikigami {
+  display: flex;
+  padding: auto;
+  min-height: 180px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.yuhun {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.yuhun-name,
 .name {
-  margin-top: 4px; /* Adjusted margin */
   font-size: 14px;
   font-weight: 500;
   color: var(--vp-c-text-1); /* Use CSS variable */
 }
+
+.yuhun-name {
+  margin-bottom: 2px;
+}
+
 .description {
   font-size: 16px;
   font-weight: 800;
   color: var(--vp-c-text-1); /* Use CSS variable */
 }
+
 .shikigami .avatar {
   width: 84px;
   height: 84px;
 }
 
 .yuhun .avatar {
-  width: 64px;
-  height: 64px;
+  width: 56px;
+  height: 56px;
 }
 
 .stats-container {
-  display: flex; /* Changed to flex */
-  flex-direction: row; /* Changed to row to place items side-by-side */
-  gap: 20px; /* Adjusted gap between position-stats and indicator-stats */
-  align-items: center; /* Align items to the top */
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
 }
 
 .position-stats {
-  display: grid; /* Changed to grid for better alignment */
-  grid-template-columns: auto 1fr; /* Two columns */
-  gap: 6px 12px; /* Row and column gap */
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 12px;
   align-items: center;
 }
 
 .indicator-stats {
-  display: grid; /* Changed to grid for better alignment */
-  grid-template-columns: auto 1fr auto 1fr; /* Four columns for two pairs of label-value */
-  gap: 6px 12px; /* Row and column gap */
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr;
+  gap: 6px 12px;
   align-items: center;
 }
 
+.para-item,
 .stat-item {
-  display: contents; /* Allows children to be placed directly in the grid */
+  display: contents;
+}
+
+.para-label,
+.stat-label {
+  font-weight: 500;
+  min-width: 48px;
+  color: var(--vp-c-text-2);
+  text-align: right;
 }
 
 .stat-label {
-  font-weight: 500;
-  color: var(--vp-c-text-2); /* Use CSS variable */
-  min-width: 60px; /* Adjusted min-width for better alignment */
-  text-align: right; /* Align labels to the right */
+  min-width: 64px;
 }
 
+.para-value,
 .stat-value {
   padding: 4px 8px;
-  background-color: var(--vp-c-bg-alt); /* Use CSS variable */
+  background-color: var(--vp-c-bg-alt);
   border-radius: 4px;
-  min-width: 80px; /* Adjusted min-width */
-  color: var(--vp-c-text-1); /* Use CSS variable */
+  min-width: 90px;
+  color: var(--vp-c-text-1);
+}
+
+.para-value {
+  min-width: 80px;
 }
 
 .target-item {
-  display: contents; /* Allows children to be placed directly in the grid */
+  display: contents;
 }
 
 .target-label {
   font-weight: 500;
-  color: var(--vp-c-text-2); /* Use CSS variable */
-  min-width: 60px; /* Adjusted min-width */
-  text-align: right; /* Align labels to the right */
+  color: var(--vp-c-text-2);
+  min-width: 60px;
+  text-align: right;
 }
 
 .target-value {
   padding: 4px 8px;
-  background-color: var(--vp-c-bg-alt); /* Use CSS variable */
+  background-color: var(--vp-c-bg-alt);
   border-radius: 4px;
-  min-width: 80px; /* Adjusted min-width */
-  color: var(--vp-c-text-1); /* Use CSS variable */
+  min-width: 80px;
+  color: var(--vp-c-text-1);
 }
 
 .info-card {
-  flex-grow: 1; /* Allow info-card to grow and fill available space */
+  flex-grow: 1;
+  width: 100%;
+  margin: 16px 0 16px 16px;
   display: flex;
   flex-direction: column;
   padding: 16px;
@@ -263,24 +325,23 @@
   font-weight: 600;
   color: var(--vp-c-text-1);
   margin-bottom: 10px;
-  padding-bottom: 10px; /* Add padding below title */
-  border-bottom: 1px solid var(--vp-c-divider); /* Add a border to separate title and content */
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--vp-c-divider);
 }
 
 .info-panel {
-  flex-grow: 1; /* Allow info-panel to grow */
-  background: var(--vp-c-bg-alt); /* Changed background color */
-  border-radius: 8px; /* Slightly smaller border-radius for inner panel */
-  padding: 12px; /* Adjusted padding */
-  overflow: auto; /* Add scroll if content overflows */
-  margin-top: 10px; /* Add margin to separate from title */
+  background: var(--vp-c-bg-alt);
+  border-radius: 8px;
+  overflow: auto;
+  margin-top: 10px;
 }
 
 .info-content {
   line-height: 1.6;
-  color: inherit; /* Inherit color from parent */
+  color: inherit;
   white-space: pre-wrap;
-  word-break: break-word; /* Added for long text */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
 
@@ -328,7 +389,7 @@ const props = defineProps({
   },
   infoText: {
     type: String,
-    default: "",
+    default: "-",
   },
   order: {
     type: Number,
@@ -359,3 +420,25 @@ const yuhunDataList = computed(() => {
   });
 });
 </script>
+
+<style scoped>
+@media screen and (max-width: 1440px) {
+  .content-panel {
+    flex-direction: column;
+    gap: 0px;
+  }
+  .content-container {
+    justify-content: space-between;
+    width: 100%;
+  }
+  .info-card {
+    margin: 0;
+    margin-right: 16px;
+  }
+}
+@media screen and (max-width: 1440px) and (min-width: 1100px) {
+  .single-slot {
+    flex-direction: row;
+  }
+}
+</style>

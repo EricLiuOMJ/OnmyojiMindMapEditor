@@ -601,8 +601,26 @@
 />
 
 <ShikigamiDisplay
-  shikigami="神酿星熊童子"
+  shikigami="本真三尾狐"
   order=36
+  description="555"
+  :yuhun="['网切']"
+  target="伤害输出"
+  :positions="{
+    second: '攻击',
+    fourth: '攻击',
+    sixth: '爆伤/暴击',
+  }"
+  :parameters="{
+    strike: '100%',
+    speed: '128+'
+  }"
+  infoText="-"
+/>
+
+<ShikigamiDisplay
+  shikigami="神酿星熊童子"
+  order=37
   description="555"
   :yuhun="['地藏像']"
   target="命中"
@@ -615,8 +633,42 @@
 />
 
 <ShikigamiDisplay
+  shikigami="孔雀明王"
+  order=38
+  description="155"
+  :yuhun="['返魂香']"
+  target="命中"
+  :positions="{
+    second: '速度',
+    fourth: '命中',
+    sixth: '生命',
+  }"
+  :parameters="{
+    speed: '200+'
+  }"
+  infoText="最好防御两件套"
+/>
+
+<ShikigamiDisplay
+  shikigami="因幡辉夜姬"
+  order=39
+  description="155"
+  :yuhun="['蚌精']"
+  target="暴击伤害"
+  :positions="{
+    second: '生命',
+    fourth: '生命',
+    sixth: '暴击伤害',
+  }"
+  :parameters="{
+    speed: '128+'
+  }"
+  infoText="防御两件套"
+/>
+
+<ShikigamiDisplay
   shikigami="泷"
-  order=37
+  order=40
   description="555"
   :yuhun="['蚌精']"
   target="治疗量"
@@ -633,7 +685,7 @@
 
 <ShikigamiDisplay
   shikigami="一目连"
-  order=38
+  order=41
    description="555"
   :yuhun="['蚌精']"
   target="治疗量"
@@ -651,7 +703,7 @@
 
 <ShikigamiDisplay
   shikigami="匣中少女"
-  order=39
+  order=42
   description="555"
   :yuhun="['蚌精']"
   target="治疗量"
@@ -668,7 +720,7 @@
 
 <ShikigamiDisplay
   shikigami="骁浪荒川之主"
-  order=40
+  order=43
   description="555"
   :yuhun="['散件']"
   target="伤害输出"
@@ -687,7 +739,7 @@
 
 <ShikigamiDisplay
   shikigami="入内雀"
-  order=41
+  order=44
   description="555"
   :yuhun="['火灵']"
   target="防御"
@@ -701,7 +753,7 @@
 
 <ShikigamiDisplay
   shikigami="入内雀"
-  order=42
+  order=45
   description="555"
   :yuhun="['木魅']"
   target="防御"
@@ -715,7 +767,7 @@
 
 <ShikigamiDisplay
   shikigami="御馔津"
-  order=43
+  order=46
   description="111"
   :yuhun="['木魅']"
   target="抵抗"
@@ -733,7 +785,7 @@
 
 <ShikigamiDisplay
   shikigami="御馔津"
-  order=44
+  order=47
   description="111"
   :yuhun="['火灵']"
   target="抵抗"
@@ -751,7 +803,7 @@
 
 <ShikigamiDisplay
   shikigami="不知火"
-  order=45
+  order=48
   description="555"
   :yuhun="['火灵']"
   target="生命"
@@ -769,7 +821,7 @@
 
 <ShikigamiDisplay
   shikigami="彼岸花"
-  order=45
+  order=49
   description="111"
   :yuhun="['钟灵']"
   target="效果命中"

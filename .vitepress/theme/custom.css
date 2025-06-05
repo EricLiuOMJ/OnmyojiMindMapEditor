@@ -1,3 +1,7 @@
+@import "./vp-code-group.css";
+@import "./custom-block.css";
+@import "./blur.css";
+
 /* 彻底覆盖Vitepress的宽度限制 */
 :root {
   --vp-layout-max-width: 100% !important;

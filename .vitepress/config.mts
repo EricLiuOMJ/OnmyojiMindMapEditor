@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import vitepressProtectPlugin from "vitepress-protect-plugin"
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -6,6 +7,10 @@ export default defineConfig({
   description: "用Markdown的方式去制作阴阳师斗技思维导图",
   base: '/OnmyojiMindMapEditor/',
   outDir: 'BuildDocs',
+  markdown: {
+    //行号显示
+    lineNumbers: true, //false关闭
+  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -26,4 +31,13 @@ export default defineConfig({
       label: "大纲"
     }
   },
+  vite: {
+    plugins: [
+      vitepressProtectPlugin({
+        disableF12: true, // 禁用F12开发者模式
+        disableCopy: true, // 禁用文本复制
+        disableSelect: true, // 禁用文本选择
+      }),
+    ]
+  }
 })

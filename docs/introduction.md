@@ -25,23 +25,20 @@
 
 ### 2.1 可用组件
 
-组件名称 用途
-| 组件名称 | 用途 |
-| --- | --- |
-| ShikigamiDisplay | 单个式神展示 |
-| ShikigamiGroup | 式神组合展示 |
-| ShikigamiGroupRow | 式神组合行（支持条件分支） |
-| ShikigamiSelector | 式神选择器 |
+| 组件名称          | 用途         |
+| ----------------- | ------------ |
+| ShikigamiDisplay  | 单个式神展示 |
+| ShikigamiGroup    | 式神组合展示 |
+| ShikigamiGroupRow | 式神组合行   |
+| ShikigamiSelector | 式神选择器   |
 
 ### 2.2 使用方法
 
 #### 2.2.1 ShikigamiDisplay 组件
 
-1. 完整属性说明
+::: code-group
 
-组件的属性可以通过以下方式传递：
-
-```js
+```js [基本用法]
 <ShikigamiDisplay
   shikigami=""       // 必填，式神名称
   order=1            // 显示序号
@@ -65,9 +62,7 @@
 />
 ```
 
-2. 实际示例
-
-```js
+```js [使用实例]
 <ShikigamiDisplay
   shikigami="大夜摩天阎魔"
   order=1
@@ -83,6 +78,8 @@
   infoText="速度必须达标，否则替换为普通阎魔"
 />
 ```
+
+:::
 
 <ShikigamiDisplay
   shikigami="大夜摩天阎魔"
@@ -101,57 +98,54 @@
 
 #### 2.2.2 ShikigamiGroupRow 组件
 
-1. 完整属性说明
+::: code-group
 
-   组件的属性可以通过以下方式传递：
-
-   ```js
-   <ShikigamiGroupRow
-   :args1="[
+```js [完整属性说明]
+<ShikigamiGroupRow
+  :args1="[
     '核心式神',
     ['可选式神1', '可选式神2'],
-    {
-      condition1: ['A', 'B'],
-      condition2: {
-        sub1: ['C'],
-        sub2: ['D', 'E']
-      }
-    },
-    '任意'
-   ]"
-   :args2="[
+    ['A', 'B'],
+    ['C', 'D'],
+    '任意',
+  ]"
+  :args2="[
     '应对方案1',
     ['可选方案1', '可选方案2'],
-    {
-      condition1: ['F'],
-      condition2: ['G', 'H']
-    }
-   ]"
-   />
-   ```
+    ['F', 'G'],
+    ['H', 'I'],
+    'J',
+  ]"
+  oname1="源赖光"
+  oname2="源赖光"
+/>
+```
 
-2. 简化用法
+```js [简化用法]
+<ShikigamiGroupRow
+  :args1="'核心式神 | 可选式神1,可选式神2 | A,B  | C,D | 任意'"
+  :args2="'应对方案1 | 可选方案1,可选方案2 | F,G | H,I | J'"
+  oname1="源赖光"
+  oname2="源赖光"
+/>
+```
 
-   ```js
-   <ShikigamiGroupRow
-   :args1="'核心式神 | 可选式神1,可选式神2 | @condition1=A,B @condition2=C | 任意'"
-   :args2="'应对方案1 | 可选方案1,可选方案2 | @condition1=F @condition2=G,H'"
-   />
-   ```
+```js [实际示例]
+<ShikigamiGroupRow
+  :args1="'晨晖惠比寿|晨晖惠比寿|云外镜,大夜摩天阎魔,阎魔|神酿星熊童子,龙珏,须佐之男|任意'"
+  :args2="'鬼金羊|不知火|纺愿缘结神|麓铭大岳丸,遥念烟烟罗,祸津神|坂田银时,阎魔,神酿星熊童子,荒川之主,猫川'"
+  oname1="源赖光"
+  oname2="源博雅"
+/>
+```
 
-3. 实际示例
-
-   ```js
-   <ShikigamiGroupRow
-   :args1="'晨晖惠比寿|晨晖惠比寿|云外镜,大夜摩天阎魔,阎魔|神酿星熊童子,龙珏,须佐之男|任意'"
-   :args2="'鬼金羊|不知火|纺愿缘结神|麓铭大岳丸,遥念烟烟罗,祸津神|坂田银时,阎魔,神酿星熊童子,荒川之主,猫川'"
-   />
-   ```
-
-   <ShikigamiGroupRow
-   :args1="'晨晖惠比寿|晨晖惠比寿|云外镜,大夜摩天阎魔,阎魔|神酿星熊童子,龙珏,须佐之男|任意'"
-   :args2="'鬼金羊|不知火|纺愿缘结神|麓铭大岳丸,遥念烟烟罗,祸津神|坂田银时,阎魔,神酿星熊童子,荒川之主,猫川'"
-   />
+:::
+<ShikigamiGroupRow
+  :args1="'晨晖惠比寿|晨晖惠比寿|云外镜,大夜摩天阎魔,阎魔|神酿星熊童子,龙珏,须佐之男|任意'"
+  :args2="'鬼金羊|不知火|纺愿缘结神|麓铭大岳丸,遥念烟烟罗,祸津神|坂田银时,阎魔,神酿星熊童子,荒川之主,猫川'"
+  oname1="源赖光"
+  oname2="源博雅"
+/>
 
 ## 3. 数据文件说明
 
@@ -169,5 +163,5 @@
 
 完整示例请参考：
 
-- docs/mindmap.md
-- docs/config.md
+- [思维导图](/docs/mindmap)
+- [配置表](/docs/config)
