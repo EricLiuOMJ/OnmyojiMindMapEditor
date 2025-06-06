@@ -5,6 +5,8 @@ import ShikigamiGroupRow from '../../components/ShikigamiGroupRow.vue'
 import ShikigamiDisplay from '../../components/ShikigamiDisplay.vue'
 import './custom.css'
 
+import backtotop from "./backtotop.vue"
+
 export default {
   extends: DefaultTheme,
   vue: {
@@ -19,5 +21,10 @@ export default {
     app.component('ShikigamiGroup', ShikigamiGroup)
     app.component('ShikigamiGroupRow', ShikigamiGroupRow)
     app.component('ShikigamiDisplay', ShikigamiDisplay)
+  },
+  Layout() { 
+    return h(DefaultTheme.Layout, null, {
+      'doc-footer-before': () => h(backtotop), // 使用doc-footer-before插槽
+    })
   }
 }
