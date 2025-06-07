@@ -68,30 +68,19 @@
               </div>
             </div>
             <div class="indicator-stats">
-              <div class="para-item">
-                <span class="para-label">速度</span>
-                <span class="para-value">{{ parameters.speed || "-" }}</span>
+              <div class="para-items-title">指标要求</div>
+              <div v-if="hasParameters" class="para-items-container">
+                <div
+                  v-for="(value, key) in parameters"
+                  :key="key"
+                  class="para-item"
+                  :class="{ hidden: value === '-' || value === '' }"
+                >
+                  <span class="para-label">{{ getLabel(key) }}</span>
+                  <span class="para-value">{{ value }}</span>
+                </div>
               </div>
-              <div class="para-item">
-                <span class="para-label">暴击</span>
-                <span class="para-value">{{ parameters.strike || "-" }}</span>
-              </div>
-              <div class="para-item">
-                <span class="para-label">攻击</span>
-                <span class="para-value">{{ parameters.attack || "-" }}</span>
-              </div>
-              <div class="para-item">
-                <span class="para-label">防御</span>
-                <span class="para-value">{{ parameters.defense || "-" }}</span>
-              </div>
-              <div class="para-item">
-                <span class="para-label">命中</span>
-                <span class="para-value">{{ parameters.hit || "-" }}</span>
-              </div>
-              <div class="para-item">
-                <span class="para-label">抵抗</span>
-                <span class="para-value">{{ parameters.resist || "-" }}</span>
-              </div>
+              <div v-else class="no-parameters">没有指标要求</div>
             </div>
           </div>
         </div>
@@ -119,7 +108,7 @@
   width: 100%;
   background: var(--vp-c-brand-1);
   display: inline-block;
-  min-width: 770px;
+  min-width: 600px;
 }
 
 .content-wrapper {
@@ -181,15 +170,18 @@
   gap: 10px; /* Adjusted gap */
 }
 
-.avatar {
-  width: 72px;
-  height: 72px;
+/* 合并相似的样式 */
+.avatar,
+.shikigami .avatar,
+.yuhun .avatar {
   border-radius: 50%;
-  border: 3px solid var(--vp-c-divider); /* Use CSS variable */
+  border: 3px solid var(--vp-c-divider);
   transition: transform 0.2s;
 }
 
-.avatar:hover {
+.avatar:hover,
+.shikigami .avatar:hover,
+.yuhun .avatar:hover {
   transform: scale(1.05);
 }
 
@@ -248,18 +240,33 @@
   grid-template-columns: auto 1fr;
   gap: 6px 12px;
   align-items: center;
+  min-width: 200px;
 }
 
 .indicator-stats {
-  display: grid;
-  grid-template-columns: auto 1fr auto 1fr;
-  gap: 6px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   align-items: center;
+  align-content: center;
+  justify-content: center;
+  border: 1px solid var(--vp-c-divider);
 }
 
-.para-item,
 .stat-item {
   display: contents;
+  align-items: center;
+  justify-items: center;
+}
+
+.para-item {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  width: 100%;
+  align-items: center;
+  margin: 4px;
+  padding: 4px;
 }
 
 .para-label,
@@ -289,6 +296,8 @@
 
 .target-item {
   display: contents;
+  justify-content: center;
+  align-content: center;
 }
 
 .target-label {
@@ -296,14 +305,23 @@
   color: var(--vp-c-text-2);
   min-width: 60px;
   text-align: right;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 20px;
 }
 
 .target-value {
-  padding: 4px 8px;
-  background-color: var(--vp-c-bg-alt);
+  padding: 4px;
   border-radius: 4px;
   min-width: 80px;
   color: var(--vp-c-text-1);
+  font-family: "Source Han Serif SC", serif;
+  font-size: 20px;
+  text-decoration: underline;
+  text-decoration-thickness: 9px;
+  text-decoration-color: rgba(255, 228, 0, 0.4);
+  text-underline-offset: -4px;
+  text-decoration-skip-ink: none;
 }
 
 .info-card {
@@ -338,10 +356,26 @@
 
 .info-content {
   line-height: 1.6;
-  color: inherit;
+  color: var(--vp-c-text-1);
   white-space: pre-wrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  background: var(--vp-c-bg-soft);
+}
+
+.para-items-title {
+  font-weight: 600;
+  margin-top: 8px;
+  color: var(--vp-c-text-2);
+  text-align: center;
+}
+
+.no-parameters {
+  padding: 8px;
+  min-width: 136px;
+  color: var(--vp-c-text-2);
+  font-style: italic;
+  text-align: center;
 }
 </style>
 
@@ -419,6 +453,22 @@ const yuhunDataList = computed(() => {
     );
   });
 });
+
+const getLabel = (key) => {
+  const labels = {
+    speed: "速度",
+    strike: "暴击",
+    attack: "攻击",
+    defense: "防御",
+    hit: "命中",
+    resist: "抵抗",
+  };
+  return labels[key] || key;
+};
+
+const hasParameters = computed(() =>
+  Object.values(props.parameters).some((v) => v && v !== "-")
+);
 </script>
 
 <style scoped>
@@ -436,9 +486,19 @@ const yuhunDataList = computed(() => {
     margin-right: 16px;
   }
 }
-@media screen and (max-width: 1440px) and (min-width: 1100px) {
+@media screen and (max-width: 1440px) and (min-width: 900px) {
   .single-slot {
     flex-direction: row;
+  }
+}
+@media (max-width: 768px) {
+  .hidden {
+    display: none;
+  }
+
+  .indicator-stats {
+    flex-direction: column;
+    gap: 8px;
   }
 }
 </style>

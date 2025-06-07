@@ -8,8 +8,10 @@ export default defineConfig({
   base: '/OnmyojiMindMapEditor/',
   outDir: 'BuildDocs',
   markdown: {
-    //行号显示
-    lineNumbers: true, //false关闭
+    lineNumbers: true,
+    image: {
+      lazyLoading: true
+    },
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
