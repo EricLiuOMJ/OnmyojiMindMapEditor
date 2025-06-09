@@ -23,6 +23,9 @@
                 : 'single-slot'
             "
           >
+            <div v-if="!!subSlot.computeTarget" class="parameter-target">
+              {{ subSlot.computeTarget || "伤害输出" }}
+            </div>
             <img
               :src="
                 subSlot.avatar ||
@@ -139,26 +142,37 @@ function parseSimplifiedFormat(input) {
     return [input];
   }
 }
-
 function parseSingleItem(item) {
   if (!item) return null;
 
-  const pintextMatch = item.match(/（([^）]+)）/);
-  const yuhunMatch = item.match(/<([^>]+)>/);
-  const skillMatch = item.match(/([^/]+)\/(\d+)/);
+  // 提取各部分内容
+  const patterns = [
+    { regex: /{([^}]+)}/, key: "computeTarget" },
+    { regex: /（([^）]+)）/, key: "pintext" },
+    { regex: /<([^>]+)>/, key: "yuhun" },
+    {
+      regex: /([^/]+)\/(\d+)/,
+      key: "skill",
+      transform: (v) => parseInt(v, 10),
+    },
+  ];
 
-  const pintext = pintextMatch ? pintextMatch[1].trim() : null;
-  const yuhun = yuhunMatch ? yuhunMatch[1].trim() : null;
-  const skill = skillMatch ? parseInt(skillMatch[2], 10) : null;
+  const result = { name: item };
 
-  let name = item;
-  if (pintextMatch) name = name.replace(pintextMatch[0], "").trim();
-  if (skillMatch) name = name.replace(skillMatch[0], "").trim();
-  if (yuhunMatch) name = name.replace(yuhunMatch[0], "").trim();
+  patterns.forEach(({ regex, key, transform }) => {
+    const match = item.match(regex);
+    if (match) {
+      result[key] = transform
+        ? transform(match[2] || match[1])
+        : match[1].trim();
+      result.name = result.name.replace(match[0], "").trim();
+    }
+  });
 
-  name = name.replace(/[^\u4e00-\u9fa5a-zA-Z]/g, "").trim();
+  // 清理名称中的特殊字符
+  result.name = result.name.replace(/[^\u4e00-\u9fa5a-zA-Z]/g, "").trim();
 
-  return { name, pintext, skill, yuhun };
+  return result;
 }
 
 const slots = computed(() => {
@@ -206,6 +220,7 @@ const slots = computed(() => {
           pintext: parsedItem.pintext,
           skill: parsedItem.skill,
           yuhun: parsedItem.yuhun,
+          computeTarget: parsedItem.computeTarget,
         };
       });
     });
@@ -401,6 +416,14 @@ const slots = computed(() => {
   display: flex;
   flex-direction: row;
   gap: 2px;
+}
+
+.parameter-target {
+  margin-bottom: 6px;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: "Source Han Serif SC", serif;
+  color: var(--theme-text-slight);
 }
 
 .pintext {
