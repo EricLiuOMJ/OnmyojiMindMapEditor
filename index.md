@@ -4,7 +4,7 @@ layout: home
 hero:
   name: "Onmyoji Mindmap Editor"
   text: "用Markdown的方式去制作阴阳师斗技思维导图"
-  tagline: VERSION 2025.5.27
+  tagline: VERSION 2025.6.12
   actions:
     - theme: brand
       text: 介绍文档

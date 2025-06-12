@@ -1,6 +1,8 @@
 # 配置表
 
-## 高配
+::: info 说明
+式神配置顺序自上而下
+:::
 
 <ShikigamiDisplay
   shikigami="面灵气"
@@ -15,17 +17,19 @@
 />
 
 <ShikigamiDisplay
-  shikigami="鬼金羊"
-  description='155'
+  shikigami="大夜摩天阎魔"
   order=2
-  :yuhun="['招财猫','火灵']"
+  :yuhun="['散件']"
   target="速度"
   :positions="{
     second: '速度',
     fourth: '命中',
-    sixth: '生命',
+    sixth: '生命/防御',
   }"
-  infoText="越快越好，做不出来的话优先计算面灵气"
+  :parameters="{
+    speed: '278+',
+  }"
+  infoText="御魂速度155+，不然只需要阎魔"
 />
 
 <ShikigamiDisplay
@@ -41,19 +45,17 @@
 />
 
 <ShikigamiDisplay
-  shikigami="大夜摩天阎魔"
+  shikigami="鬼金羊"
+  description='155'
   order=4
-  :yuhun="['散件']"
+  :yuhun="['招财猫','火灵']"
   target="速度"
   :positions="{
     second: '速度',
     fourth: '命中',
-    sixth: '生命/防御',
+    sixth: '生命',
   }"
-  :parameters="{
-    speed: '278+',
-  }"
-  infoText="御魂速度155+，不然只需要阎魔"
+  infoText="越快越好，做不出来的话优先计算面灵气"
 />
 
 <ShikigamiDisplay
@@ -245,7 +247,7 @@
 <ShikigamiDisplay
   shikigami="流光追月神"
   order=16
-  :yuhun="['薙魂']"
+  :yuhun="['薙魂', '共潜']"
   target="生命"
   :positions="{
     second: '速度',
@@ -835,5 +837,3 @@
   }"
   infoText="-"
 />
-
-## 低配
