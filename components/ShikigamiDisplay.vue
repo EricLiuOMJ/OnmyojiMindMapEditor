@@ -11,7 +11,7 @@
         <div class="content-container">
           <div class="show">
             <!-- 式神展示 -->
-            <div class="single-slot">
+            <div class="avatar-slot">
               <div class="shikigami">
                 <img
                   :src="
@@ -27,7 +27,7 @@
             </div>
 
             <!-- 御魂展示 -->
-            <div class="single-slot">
+            <div class="yuhun-display">
               <div
                 v-for="(yuhun, index) in yuhunDataList"
                 :key="index"
@@ -46,7 +46,6 @@
               </div>
             </div>
           </div>
-
           <!-- 位置和指标信息 -->
           <div class="stats-container">
             <div class="position-stats">
@@ -129,6 +128,11 @@
   font-weight: bold;
 }
 
+.order-number {
+  min-width: 24px;
+  text-align: center;
+}
+
 .content-panel {
   display: flex;
   gap: 10px;
@@ -150,15 +154,28 @@
   display: flex;
   flex-direction: row;
   gap: 10px;
+  width: 40%;
+  margin-right: 10px;
 }
 
-.single-slot {
+.avatar-slot {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: auto;
   gap: 2px;
   min-width: 90px;
+}
+
+.yuhun-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  align-content: center;
+  margin: auto;
 }
 
 .yuhun-wrapper {
@@ -166,7 +183,7 @@
   flex-direction: columns;
   align-items: center;
   justify-content: center;
-  min-width: 90px;
+  min-width: 60px;
   gap: 10px; /* Adjusted gap */
 }
 
@@ -240,17 +257,17 @@
   grid-template-columns: auto 1fr;
   gap: 6px 12px;
   align-items: center;
-  min-width: 200px;
+  min-width: 216px;
 }
 
 .indicator-stats {
   display: flex;
   flex-direction: column;
-  gap: 6px;
   align-items: center;
   align-content: center;
   justify-content: center;
   border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
 }
 
 .stat-item {
@@ -266,7 +283,7 @@
   width: 100%;
   align-items: center;
   margin: 4px;
-  padding: 4px;
+  padding: 2px 4px;
 }
 
 .para-label,
@@ -291,7 +308,7 @@
 }
 
 .para-value {
-  min-width: 80px;
+  min-width: 64px;
 }
 
 .target-item {
@@ -317,10 +334,11 @@
   color: var(--vp-c-text-1);
   font-family: "Source Han Serif SC", serif;
   font-size: 20px;
+  font-weight: 700;
   text-decoration: underline;
-  text-decoration-thickness: 9px;
+  text-decoration-thickness: 18px;
   text-decoration-color: rgba(255, 228, 0, 0.4);
-  text-underline-offset: -4px;
+  text-underline-offset: -12px;
   text-decoration-skip-ink: none;
 }
 
@@ -365,7 +383,7 @@
 
 .para-items-title {
   font-weight: 600;
-  margin-top: 8px;
+  margin: 8px;
   color: var(--vp-c-text-2);
   text-align: center;
 }
@@ -486,19 +504,21 @@ const hasParameters = computed(() =>
     margin-right: 16px;
   }
 }
-@media screen and (max-width: 1440px) and (min-width: 900px) {
-  .single-slot {
+@media screen and (max-width: 1440px) and (min-width: 985px) {
+  .yuhun-display {
     flex-direction: row;
+    gap: 5px;
   }
 }
-@media (max-width: 768px) {
-  .hidden {
-    display: none;
+@media screen and (max-width: 1280px) and (min-width: 985px) {
+  .stats-container {
+    justify-content: space-around;
+    width: 60%;
   }
-
+}
+@media (max-width: 800px) {
   .indicator-stats {
     flex-direction: column;
-    gap: 8px;
   }
 }
 </style>
