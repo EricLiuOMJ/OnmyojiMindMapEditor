@@ -1,12 +1,22 @@
 <template>
+  <h3 :id="`${shikigamiData.name}`" tabindex="-1">
+    [{{ displayOrder }}] {{ shikigamiData.name }}
+    <a
+      class="header-anchor"
+      :href="`#${shikigamiData.name}`"
+      :aria-label="`'Permalink to '${shikigamiData.name}''`"
+    >
+      ​
+    </a>
+  </h3>
   <div class="shikigami-display">
     <div class="content-wrapper">
       <!-- 新增的序号展示模块 -->
       <div class="order-display">
-        <span class="order-number">{{ order }}</span>
+        <span class="order-number">{{ displayOrder }}</span>
       </div>
 
-      <!-- 新增的包裹序号右边内容的 div -->
+      <!-- 其他内容保持不变 -->
       <div class="content-panel">
         <div class="content-container">
           <div class="show">
@@ -113,7 +123,8 @@
 .content-wrapper {
   display: flex;
   gap: 20px;
-  align-items: center; /* Changed to align items to the center */
+  align-items: center;
+  /* Changed to align items to the center */
 }
 
 .order-display {
@@ -123,7 +134,8 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  color: var(--vp-c-white); /* Example color */
+  color: var(--vp-c-white);
+  /* Example color */
   font-size: 20px;
   font-weight: bold;
 }
@@ -184,7 +196,8 @@
   align-items: center;
   justify-content: center;
   min-width: 60px;
-  gap: 10px; /* Adjusted gap */
+  gap: 10px;
+  /* Adjusted gap */
 }
 
 /* 合并相似的样式 */
@@ -222,7 +235,8 @@
 .name {
   font-size: 14px;
   font-weight: 500;
-  color: var(--vp-c-text-1); /* Use CSS variable */
+  color: var(--vp-c-text-1);
+  /* Use CSS variable */
 }
 
 .yuhun-name {
@@ -232,7 +246,8 @@
 .description {
   font-size: 16px;
   font-weight: 800;
-  color: var(--vp-c-text-1); /* Use CSS variable */
+  color: var(--vp-c-text-1);
+  /* Use CSS variable */
 }
 
 .shikigami .avatar {
@@ -396,11 +411,13 @@
   text-align: center;
 }
 </style>
-
 <script setup>
-import { computed } from "vue";
+import { useCounterStore } from "./counterStore.js";
+import { ref, computed } from "vue";
 import shikigamiList from "../public/data/Shikigami.json";
 import yuhunList from "../public/data/Yuhun.json";
+
+const counterStore = useCounterStore();
 
 const props = defineProps({
   shikigami: {
@@ -443,11 +460,14 @@ const props = defineProps({
     type: String,
     default: "-",
   },
-  order: {
-    type: Number,
-    default: 1,
-  },
 });
+
+const counterName =
+  import.meta.env.VITE_CURRENT_FILE_NAME + "display" || "default";
+
+const displayOrder = ref(counterStore.getCounter(counterName));
+
+counterStore.incrementCounter(counterName);
 
 const shikigamiData = computed(() => {
   const found = shikigamiList.find((s) => s.name === props.shikigami);
@@ -495,27 +515,32 @@ const hasParameters = computed(() =>
     flex-direction: column;
     gap: 0px;
   }
+
   .content-container {
     justify-content: space-between;
     width: 100%;
   }
+
   .info-card {
     margin: 0;
     margin-right: 16px;
   }
 }
+
 @media screen and (max-width: 1440px) and (min-width: 985px) {
   .yuhun-display {
     flex-direction: row;
     gap: 5px;
   }
 }
+
 @media screen and (max-width: 1280px) and (min-width: 985px) {
   .stats-container {
     justify-content: space-around;
     width: 60%;
   }
 }
+
 @media (max-width: 800px) {
   .indicator-stats {
     flex-direction: column;
