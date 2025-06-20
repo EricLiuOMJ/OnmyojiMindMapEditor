@@ -3,6 +3,7 @@ import ShikigamiSelector from "../../components/ShikigamiSelector.vue";
 import ShikigamiGroup from "../../components/ShikigamiGroup.vue";
 import ShikigamiGroupRow from "../../components/ShikigamiGroupRow.vue";
 import ShikigamiDisplay from "../../components/ShikigamiDisplay.vue";
+import YuhunSchemeDisplay from "../../components/YuhunSchemeDisplay.vue";
 import "./custom.css";
 
 import backtotop from "./backtotop.vue";
@@ -23,6 +24,7 @@ export default {
     app.component("ShikigamiGroup", ShikigamiGroup);
     app.component("ShikigamiGroupRow", ShikigamiGroupRow);
     app.component("ShikigamiDisplay", ShikigamiDisplay);
+    app.component("YuhunSchemeDisplay", YuhunSchemeDisplay);
     app.use(createPinia());
   },
   Layout() {

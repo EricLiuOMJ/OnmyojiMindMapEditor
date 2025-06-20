@@ -2,7 +2,7 @@
   {
     "name": "散件",
     "shortName": "散件",
-    "type": "attack",
+    "type": "None",
     "avatar": "/OnmyojiMindMapEditor/pics/Yuhun/散件.png"
   },
   {
@@ -330,37 +330,37 @@
   {
     "name": "稻荷穗箭",
     "shortName": "稻",
-    "type": "PVE",
+    "type": "PVP",
     "avatar": "/OnmyojiMindMapEditor/pics/Yuhun/稻荷穗箭.png"
   },
   {
     "name": "纺缘锤",
     "shortName": "缘",
-    "type": "PVE",
+    "type": "PVP",
     "avatar": "/OnmyojiMindMapEditor/pics/Yuhun/纺缘锤.png"
   },
   {
     "name": "月之石",
     "shortName": "月石",
-    "type": "PVE",
+    "type": "PVP",
     "avatar": "/OnmyojiMindMapEditor/pics/Yuhun/月之石.png"
   },
   {
     "name": "预言星盘",
     "shortName": "星盘",
-    "type": "PVE",
+    "type": "PVP",
     "avatar": "/OnmyojiMindMapEditor/pics/Yuhun/预言星盘.png"
   },
   {
     "name": "天羽羽斩",
     "shortName": "羽",
-    "type": "PVE",
+    "type": "PVP",
     "avatar": "/OnmyojiMindMapEditor/pics/Yuhun/天羽羽斩.png"
   },
   {
     "name": "八咫镜",
     "shortName": "八咫镜",
-    "type": "attack",
+    "type": "PVP",
     "avatar": "/OnmyojiMindMapEditor/pics/Yuhun/八咫镜.png"
   }
 ]

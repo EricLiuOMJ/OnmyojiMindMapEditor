@@ -33,13 +33,13 @@ export default defineConfig({
       label: "大纲"
     }
   },
-  vite: {
-    plugins: [
-      vitepressProtectPlugin({
-        disableF12: true, // 禁用F12开发者模式
-        disableCopy: true, // 禁用文本复制
-        disableSelect: true, // 禁用文本选择
-      }),
-    ]
-  }
+  // vite: {
+  //   plugins: [
+  //     vitepressProtectPlugin({
+  //       disableF12: true, // 禁用F12开发者模式
+  //       disableCopy: true, // 禁用文本复制
+  //       disableSelect: true, // 禁用文本选择
+  //     }),
+  //   ]
+  // }
 })
