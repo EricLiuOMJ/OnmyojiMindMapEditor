@@ -1,6 +1,12 @@
 <template>
   <div class="yuhun-scheme-display">
     <div class="header">
+      <div v-if="titleType" class="type-badge-group">
+        <div v-for="(type, index) in titleType" :key="index" :class="['type-badge', type]">
+          {{ type }}
+        </div>
+      </div>
+
       <h3 class="title">{{ title }}</h3>
       <div class="badge">{{ displayTotalAmount }}种</div>
     </div>
@@ -16,24 +22,13 @@
       </div>
 
       <div class="yuhuns" v-if="parsedYuhuns && parsedYuhuns.length > 0">
-        <div
-          v-for="(yuhunsByType, typeName) in updatedGroupedYuhuns"
-          :key="typeName"
-          class="yuhun-type-group"
-        >
+        <div v-for="(yuhunsByType, typeName) in updatedGroupedYuhuns" :key="typeName" class="yuhun-type-group">
           <h4 class="type-header">{{ typeName }}</h4>
-          <div
-            v-if="yuhunsByType.length === 1 && yuhunsByType[0] === '全部'"
-            class="all-yuhuns-in-type"
-          >
+          <div v-if="yuhunsByType.length === 1 && yuhunsByType[0] === '全部'" class="all-yuhuns-in-type">
             全部御魂
           </div>
           <div v-else class="yuhun-grid">
-            <div
-              class="yuhun-item"
-              v-for="(yuhun, index) in yuhunsByType"
-              :key="index"
-            >
+            <div class="yuhun-item" v-for="(yuhun, index) in yuhunsByType" :key="index">
               <img :src="getYuhunIcon(yuhun)" :alt="yuhun" class="yuhun-icon" />
               <span class="yuhun-name">{{ yuhun }}</span>
             </div>
@@ -85,6 +80,14 @@ const props = defineProps({
     type: String,
     default: "",
   },
+});
+
+const titleType = computed(() => {
+  const types = [];
+  if (props.title.includes('高配')) types.push('高配');
+  if (props.title.includes('中配')) types.push('中配');
+  if (props.title.includes('通配')) types.push('通配');
+  return types.length > 0 ? types : null;
 });
 
 const getYuhunIcon = (name) => {
@@ -146,8 +149,8 @@ const displayTotalAmount = computed(() => {
   return parsedYuhuns.value.length > 0
     ? parsedYuhuns.value.length
     : props.yuhuns.length === 0
-    ? 58
-    : props.total_amount;
+      ? 58
+      : props.total_amount;
 });
 
 const groupedYuhuns = computed(() => {
@@ -218,20 +221,31 @@ const updatedGroupedYuhuns = computed(() => {
 }
 
 .badge {
-  background: var(--vp-c-brand-2); /* 使用更柔和的品牌色 */
-  color: var(--vp-c-bg); /* 确保文字颜色与背景对比鲜明 */
-  padding: 6px 12px; /* 增加内边距 */
-  border-radius: 20px; /* 更大的圆角，使其看起来像胶囊 */
-  font-size: 13px; /* 稍微调整字体大小 */
-  font-weight: 600; /* 增加字体粗细 */
-  letter-spacing: 0.5px; /* 增加字母间距 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加细微阴影 */
-  transition: all 0.3s ease; /* 添加过渡效果 */
+  background: var(--vp-c-brand-2);
+  /* 使用更柔和的品牌色 */
+  color: var(--vp-c-bg);
+  /* 确保文字颜色与背景对比鲜明 */
+  padding: 6px 12px;
+  /* 增加内边距 */
+  border-radius: 20px;
+  /* 更大的圆角，使其看起来像胶囊 */
+  font-size: 13px;
+  /* 稍微调整字体大小 */
+  font-weight: 600;
+  /* 增加字体粗细 */
+  letter-spacing: 0.5px;
+  /* 增加字母间距 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* 添加细微阴影 */
+  transition: all 0.3s ease;
+  /* 添加过渡效果 */
 }
 
 .badge:hover {
-  transform: translateY(-1px); /* 鼠标悬停时轻微上浮 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* 鼠标悬停时阴影更明显 */
+  transform: translateY(-1px);
+  /* 鼠标悬停时轻微上浮 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  /* 鼠标悬停时阴影更明显 */
 }
 
 .description {
@@ -309,12 +323,15 @@ const updatedGroupedYuhuns = computed(() => {
 .yuhuns {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px; /* 调整分组之间的间距 */
+  gap: 8px;
+  /* 调整分组之间的间距 */
 }
 
 .yuhun-type-group {
-  flex: 0 0 auto; /* 不拉伸，不收缩，根据内容决定宽度 */
-  margin-bottom: 0; /* 移除底部外边距，因为父容器已经有gap */
+  flex: 0 0 auto;
+  /* 不拉伸，不收缩，根据内容决定宽度 */
+  margin-bottom: 0;
+  /* 移除底部外边距，因为父容器已经有gap */
   padding: 8px;
   border-radius: 4px;
 }
@@ -323,5 +340,35 @@ const updatedGroupedYuhuns = computed(() => {
   font-size: 14px;
   margin-bottom: 4px;
   color: #666;
+}
+
+.type-badge-group {
+  display: flex;
+  gap: 6px;
+  margin: 0 12px;
+}
+
+.type-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  margin-right: 12px;
+}
+
+.type-badge.高配 {
+  background-color: #ff5722;
+  /* 橙色 */
+}
+
+.type-badge.中配 {
+  background-color: #4caf50;
+  /* 绿色 */
+}
+
+.type-badge.通配 {
+  background-color: #2196f3;
+  /* 蓝色 */
 }
 </style>
