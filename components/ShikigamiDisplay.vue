@@ -1,11 +1,7 @@
 <template>
   <h3 :id="`${shikigamiData.name}`" tabindex="-1">
     [{{ displayOrder }}] {{ shikigamiData.name }}
-    <a
-      class="header-anchor"
-      :href="`#${shikigamiData.name}`"
-      :aria-label="`'Permalink to '${shikigamiData.name}''`"
-    >
+    <a class="header-anchor" :href="`#${shikigamiData.name}`" :aria-label="`'Permalink to '${shikigamiData.name}''`">
       ​
     </a>
   </h3>
@@ -23,14 +19,9 @@
             <!-- 式神展示 -->
             <div class="avatar-slot">
               <div class="shikigami">
-                <img
-                  :src="
-                    shikigamiData.avatar ||
-                    '/OnmyojiMindMapEditor/pics/Shikigami/default.png'
-                  "
-                  :alt="shikigami || '未选择式神'"
-                  class="avatar"
-                />
+                <img :src="shikigamiData.avatar ||
+                  '/OnmyojiMindMapEditor/pics/Shikigami/default.png'
+                  " :alt="shikigami || '未选择式神'" class="avatar" />
                 <span class="name">{{ shikigamiData.name || "" }}</span>
                 <span class="description">技能 {{ description || "555" }}</span>
               </div>
@@ -38,19 +29,11 @@
 
             <!-- 御魂展示 -->
             <div class="yuhun-display">
-              <div
-                v-for="(yuhun, index) in yuhunDataList"
-                :key="index"
-                class="yuhun-wrapper"
-              >
+              <div v-for="(yuhun, index) in yuhunDataList" :key="index" class="yuhun-wrapper">
                 <div class="yuhun">
-                  <img
-                    :src="
-                      yuhun.avatar ||
-                      '/OnmyojiMindMapEditor/pics/Yuhun/default.png'
-                    "
-                    class="avatar"
-                  />
+                  <img :src="yuhun.avatar ||
+                    '/OnmyojiMindMapEditor/pics/Yuhun/default.png'
+                    " class="avatar" />
                   <span class="yuhun-name">{{ yuhun.name || "" }}</span>
                 </div>
               </div>
@@ -79,12 +62,8 @@
             <div class="indicator-stats">
               <div class="para-items-title">指标要求</div>
               <div v-if="hasParameters" class="para-items-container">
-                <div
-                  v-for="(value, key) in parameters"
-                  :key="key"
-                  class="para-item"
-                  :class="{ hidden: value === '-' || value === '' }"
-                >
+                <div v-for="(value, key) in parameters" :key="key" class="para-item"
+                  :class="{ hidden: value === '-' || value === '' }">
                   <span class="para-label">{{ getLabel(key) }}</span>
                   <span class="para-value">{{ value }}</span>
                 </div>
@@ -463,11 +442,12 @@ const props = defineProps({
 });
 
 const counterName =
-  import.meta.env.VITE_CURRENT_FILE_NAME + "display" || "default";
+  import.meta.env.VITE_CURRENT_FILE_NAME || "default";
 
 const displayOrder = ref(counterStore.getCounter(counterName));
 
 counterStore.incrementCounter(counterName);
+
 
 const shikigamiData = computed(() => {
   const found = shikigamiList.find((s) => s.name === props.shikigami);

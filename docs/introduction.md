@@ -2,7 +2,7 @@
 
 ## 1. VitePress 部分
 
-本项目使用 [VitePress](https://vitepress.dev/) 作为文档站点生成器。主要功能包括：
+本项目使用 [VitePress](https://vitepress.dev/) 作为文档站点生成器。
 
 - **快速启动**：
 
@@ -163,5 +163,5 @@
 
 完整示例请参考：
 
-- [思维导图](/docs/mindmap)
-- [配置表](/docs/config)
+- [思维导图](/docs/mindmap0715)
+- [配置表](/docs/config0715)
